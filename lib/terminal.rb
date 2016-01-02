@@ -5,6 +5,9 @@ module Monad
     def initialize(shell)
       super()
 
+      # The shell-sim colors the output. Turn that off so it can be handled here instead.
+      String.disable_colorization = true
+
       @shell = shell
       @window.caption = 'Monad'
       @command_line = GosuRPG::TextField.new(@window, @font,
@@ -14,7 +17,8 @@ module Monad
 
     def update
       if @current_command
-        @shell.handle_commands(@current_command)
+        res, cmd = @shell.handle_commands(@current_command)
+        @window.text_input.text = res
         @current_command = nil
       end
     end
