@@ -14,7 +14,7 @@ module Monad
 
     def update
       if @current_command
-        run_command(@current_command)
+        @shell.handle_commands(@current_command)
         @current_command = nil
       end
     end
@@ -28,12 +28,6 @@ module Monad
         @current_command = @window.text_input.text
         @window.text_input.text = ''
       end
-    end
-
-    private
-
-    def run_command(command)
-      puts "Running command: `#{command}`"
     end
   end
 end
