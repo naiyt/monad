@@ -6,11 +6,20 @@ PATH
       pry
       pry-nav
 
+PATH
+  remote: /Users/nate/workspace/shell-sim
+  specs:
+    shell_sim (0.0.1)
+      colorize
+      highline
+
 GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.0)
+    colorize (0.7.7)
     gosu (0.10.4)
+    highline (1.7.8)
     method_source (0.8.2)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -25,6 +34,7 @@ PLATFORMS
 
 DEPENDENCIES
   gosu_rpg!
+  shell_sim!
 
 BUNDLED WITH
    1.11.2
