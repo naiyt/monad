@@ -2,9 +2,10 @@ module Monad
   class Terminal < GosuRPG::GameState
     PROMPT_PADDING = 10
 
-    def initialize
-      super
+    def initialize(shell)
+      super()
 
+      @shell = shell
       @window.caption = 'Monad'
       @command_line = GosuRPG::TextField.new(@window, @font,
         PROMPT_PADDING, @window.height - (@font.height + PROMPT_PADDING))

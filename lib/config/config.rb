@@ -1,3 +1,6 @@
+require 'yaml'
+require 'shell_sim'
+
 WINDOW_WIDTH  = 1280
 WINDOW_HEIGHT = 800
 FONT_SIZE     = 20
@@ -10,6 +13,11 @@ end
 
 def font_path(name)
   "assets/fonts/#{name}.ttf"
+end
+
+ShellSim.configure do |config|
+  config.fs_data    = YAML.load_file('lib/config/fs_fixture.yml')
+  config.users_data = YAML.load_file('lib/config/users_fixture.yml')
 end
 
 GosuRPG.configure do |config|
