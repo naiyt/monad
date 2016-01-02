@@ -22,7 +22,7 @@ module Monad
       if @current_command
         res, cmd = @shell.handle_commands(@current_command)
         @to_display << @current_command
-        @to_display << res
+        res.split("\n").each { |partial| @to_display << partial }
         @current_command = nil
       end
     end
