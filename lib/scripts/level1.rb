@@ -2,7 +2,7 @@ module Monad
   module Scripts
     class Level1
       def self.create
-        ShellSim::Scripts::Script.new do
+        ShellSim::Scripts::Script.new(terminal) do
           available_commands [:help, :man]
 
           expect_cmd :help, 'HELP MEEEEEEE'

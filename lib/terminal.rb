@@ -23,8 +23,8 @@ module Monad
     def update
       if @current_command
         res, cmd = @shell.handle_commands(@current_command)
-        @text_buffer << @current_command
-        res.split("\n").each { |partial| @text_buffer << partial }
+        add_to_buffer(@current_command)
+        res.split("\n").each { |partial| add_to_buffer(partial) }
         @current_command = nil
         @current_script.handle_command(res, cmd)
       end
@@ -45,6 +45,10 @@ module Monad
         @current_command = @window.text_input.text
         @window.text_input.text = ''
       end
+    end
+
+    def add_to_buffer(text)
+      @text_buffer << text)
     end
   end
 end
