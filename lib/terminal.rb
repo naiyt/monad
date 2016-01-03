@@ -17,21 +17,21 @@ module Monad
 
       @current_script = Scripts::Level1.create
 
-      @display_text = []
+      @text_buffer = []
     end
 
     def update
       if @current_command
         res, cmd = @shell.handle_commands(@current_command)
-        @display_text << @current_command
-        res.split("\n").each { |partial| @display_text << partial }
+        @text_buffer << @current_command
+        res.split("\n").each { |partial| @text_buffer << partial }
         @current_command = nil
         @current_script.handle_command(res, cmd)
       end
     end
 
     def draw
-      @display_text.reverse.each_with_index do |text, index|
+      @text_buffer.reverse.each_with_index do |text, index|
         x = PROMPT_PADDING
         y = @window.height - (@command_line.height * (index + 2))
         @font.draw(text, x, y, Monad::ZOrder::UI)
