@@ -15,9 +15,9 @@ module Monad
         PROMPT_PADDING, @window.height - (@font.height + PROMPT_PADDING))
       @window.text_input = @command_line
 
-      @current_script = Scripts::Level1.create(self)
-
       @text_buffer = []
+
+      @current_script = Scripts::Level1.create(self)
     end
 
     def update
