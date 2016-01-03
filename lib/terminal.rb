@@ -15,20 +15,23 @@ module Monad
         PROMPT_PADDING, @window.height - (@font.height + PROMPT_PADDING))
       @window.text_input = @command_line
 
-      @to_display = []
+      @current_script = Scripts::Level1.create
+
+      @display_text = []
     end
 
     def update
       if @current_command
         res, cmd = @shell.handle_commands(@current_command)
-        @to_display << @current_command
-        res.split("\n").each { |partial| @to_display << partial }
+        @display_text << @current_command
+        res.split("\n").each { |partial| @display_text << partial }
         @current_command = nil
+        @current_script.handle_command(res, cmd)
       end
     end
 
     def draw
-      @to_display.reverse.each_with_index do |text, index|
+      @display_text.reverse.each_with_index do |text, index|
         x = PROMPT_PADDING
         y = @window.height - (@command_line.height * (index + 2))
         @font.draw(text, x, y, Monad::ZOrder::UI)
