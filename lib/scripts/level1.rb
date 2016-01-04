@@ -5,6 +5,8 @@ module Monad
         ShellSim::Scripts::Script.new(terminal) do
           available_commands [:help, :man]
 
+          output 'HIII'
+
           expect_cmd :help, 'HELP MEEEEEEE'
 
           output 'blah'
