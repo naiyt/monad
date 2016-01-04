@@ -1,12 +1,4 @@
 PATH
-  remote: /Users/nate/workspace/gosu_rpg
-  specs:
-    gosu_rpg (0.0.1)
-      gosu
-      pry
-      pry-nav
-
-PATH
   remote: /Users/nate/workspace/shell-sim
   specs:
     shell_sim (0.0.1)
@@ -33,7 +25,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  gosu_rpg!
+  gosu
+  pry
+  pry-nav
   shell_sim!
 
 BUNDLED WITH
