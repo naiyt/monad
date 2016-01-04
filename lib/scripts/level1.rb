@@ -7,6 +7,8 @@ module Monad
 
           expect_cmd :help, 'HELP MEEEEEEE'
 
+          output 'blah'
+
           expect_cmd :man, 'MAN MEEEEEEE'
         end
       end
