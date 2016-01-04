@@ -1,5 +1,5 @@
 require 'yaml'
-require 'shell_sim'
+require_relative '../shell-sim/shell_sim'
 
 WINDOW_WIDTH  = 1280
 WINDOW_HEIGHT = 800
