@@ -7,7 +7,7 @@ require_relative 'shell_sim/shell'
 require_relative 'shell_sim/user'
 require_relative 'shell_sim/scripting'
 
-Dir['./lib/shell-sim/shell_sim/commands/*.rb'].each { |f| require f }
+Dir['./lib/shell_sim/shell_sim/commands/*.rb'].each { |f| require f }
 
 module ShellSim
   def self.configure
