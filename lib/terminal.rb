@@ -22,8 +22,9 @@ module Monad
 
     def update
       if @current_command
-        res, cmd = @shell.handle_commands(@current_command)
         add_to_buffer(@current_command)
+        res, cmd = @shell.handle_commands(@current_command)
+        res = '' unless res
         res.split("\n").each { |partial| add_to_buffer(partial) }
         @current_command = nil
         @current_script.handle_command(res, cmd)
