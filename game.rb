@@ -1,9 +1,9 @@
 require_relative 'lib/gosu_stuff/gosu_stuff'
 require_relative 'lib/config/config'
-require_relative 'lib/terminal'
-Dir["./lib/scripts/*.rb"].each {|file| require file }
+Dir["./lib/game_states/*.rb"].each { |f| require f }
+Dir["./lib/scripts/*.rb"].each { |f| require f }
 
 shell    = ShellSim::Shell.new('root', 'password')
-terminal = Monad::Terminal.new(shell)
+terminal = Monad::GameStates::Terminal.new(shell)
 
 GosuStuff.play(terminal)
