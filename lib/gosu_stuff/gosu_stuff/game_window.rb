@@ -1,4 +1,4 @@
-module GosuRPG
+module GosuStuff
   class GameWindow < Gosu::Window
     attr_accessor :state
 

@@ -20,8 +20,8 @@ ShellSim.configure do |config|
   config.users_data = YAML.load_file('lib/config/users_fixture.yml')
 end
 
-GosuRPG.configure do |config|
-  config.window    = GosuRPG::GameWindow.new(WINDOW_WIDTH, WINDOW_HEIGHT)
+GosuStuff.configure do |config|
+  config.window    = GosuStuff::GameWindow.new(WINDOW_WIDTH, WINDOW_HEIGHT)
   config.font      = font_path('consolas')
   config.font_size = FONT_SIZE
 end

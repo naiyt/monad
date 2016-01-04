@@ -1,11 +1,11 @@
 require 'gosu'
-require_relative 'gosu_rpg/config'
-require_relative 'gosu_rpg/exceptions'
-require_relative 'gosu_rpg/text_field'
-require_relative 'gosu_rpg/game_window'
-require_relative 'gosu_rpg/game_state'
+require_relative 'gosu_stuff/config'
+require_relative 'gosu_stuff/exceptions'
+require_relative 'gosu_stuff/text_field'
+require_relative 'gosu_stuff/game_window'
+require_relative 'gosu_stuff/game_state'
 
-module GosuRPG
+module GosuStuff
   def self.configure
     yield config
   end

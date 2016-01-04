@@ -1,7 +1,7 @@
-module GosuRPG
+module GosuStuff
   class GameState
     def initialize
-      @config = GosuRPG.config
+      @config = GosuStuff.config
       @window = @config.window
       if @config.font
         @font = Gosu::Font.new(@config.font_size)
@@ -11,7 +11,7 @@ module GosuRPG
     end
 
     def self.switch(new_state)
-      window = GosuRPG.config.window
+      window = GosuStuff.config.window
       window.state.leave if window.state
       window.state = new_state
       new_state.enter

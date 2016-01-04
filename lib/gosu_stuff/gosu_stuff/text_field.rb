@@ -1,6 +1,6 @@
 # https://www.omniref.com/ruby/gems/gosu/0.7.24/universal-darwin/files/examples/TextInput.rb#line=153
 
-module GosuRPG
+module GosuStuff
   class TextField < Gosu::TextInput
     def initialize(window, font, x, y, background_color=0xcc666666, caret_color=0xffffffff, padding=5)
       super()
