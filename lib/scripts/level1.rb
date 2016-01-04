@@ -15,6 +15,8 @@ module Monad
 
           output "Well done."
 
+          output "And another"
+
           expect_cmd :help, "Throughout this tutorial you will add new commands to your arsenal. Use the command 'help' to list all of your available commands."
 
           expect_cmd_with_args :man, :man, "Each command comes with a 'manual'. You can read a commands manual page with the 'man' command. For example, to read the manual for the command 'help' you would use the command 'man help'. Read the manual page for the 'man' command."
