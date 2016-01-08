@@ -16,7 +16,7 @@ module Monad
           PROMPT_PADDING, @window.height - (@font.height + PROMPT_PADDING))
         @window.text_input = @command_line
 
-        @text_buffer = ''
+        @text_buffer = []
 
         @current_script = Scripts::Level1.create(self)
 
@@ -35,7 +35,9 @@ module Monad
 
       def draw
         if @new_text
-          @text_image = Gosu::Image.from_text(@text_buffer.chomp,
+          chomp_text_buffer!
+
+          @text_image = Gosu::Image.from_text(@text_buffer.join("\n"),
             @font.height,
             font: @font.name,
             width: cli_width
@@ -58,7 +60,7 @@ module Monad
       end
 
       def add_to_buffer(text)
-        @text_buffer += "#{text}\n"
+        @text_buffer << text
       end
 
       private
@@ -79,6 +81,17 @@ module Monad
 
       def scrollback_y_pos(text)
         @window.height - text.height - @command_line.height
+      end
+
+      # Ensure that the text buffer is not larger than the screen
+      def chomp_text_buffer!
+        if @text_buffer.length > allowed_lines
+          @text_buffer = @text_buffer.drop(@text_buffer.length - allowed_lines)
+        end
+      end
+
+      def allowed_lines
+        @allowed_lines ||= (@window.height - @command_line.height) / @font.height
       end
     end
   end
