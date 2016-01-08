@@ -9,8 +9,15 @@ module Monad
         # The shell-sim colors the output. Turn that off so it can be handled here instead.
         String.disable_colorization = true
 
+        @prompt_text = "nate@monad: "
+
+        @prompt = Gosu::Image.from_text(@prompt_text,
+          @font.height,
+          font: @font.name
+        )
+
         @command_line = GosuStuff::TextField.new(@window, @font,
-          PROMPT_PADDING, @window.height - (@font.height + PROMPT_PADDING))
+          @prompt.width, cli_y_pos)
         @window.text_input = @command_line
 
         @shell = shell
@@ -47,6 +54,8 @@ module Monad
         @text_image.draw(0, scrollback_y_pos(@text_image), Monad::ZOrder::UI)
 
         @command_line.draw(Monad::ZOrder::UI)
+
+        @prompt.draw(0, cli_y_pos, Monad::ZOrder::UI)
       end
 
       def button_down(id)
@@ -58,7 +67,7 @@ module Monad
       end
 
       def add_to_buffer(text)
-        @text_buffer << text
+        @text_buffer << "#{@prompt_text}#{text}"
       end
 
       private
@@ -90,6 +99,10 @@ module Monad
 
       def allowed_lines
         @allowed_lines ||= (@window.height - @command_line.height) / @font.height
+      end
+
+      def cli_y_pos
+        @window.height - (@font.height + PROMPT_PADDING)
       end
     end
   end
