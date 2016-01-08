@@ -30,7 +30,6 @@ module Monad
           add_res_to_buffer(res)
           @current_input = nil
           @current_script.handle_command(res, cmd)
-          @new_text = true
         end
       end
 
@@ -54,6 +53,7 @@ module Monad
         if id == Gosu::KbReturn
           @current_input = @window.text_input.text
           @window.text_input.text = ''
+          @new_text = true
         end
       end
 
