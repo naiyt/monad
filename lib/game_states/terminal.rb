@@ -16,9 +16,11 @@ module Monad
           PROMPT_PADDING, @window.height - (@font.height + PROMPT_PADDING))
         @window.text_input = @command_line
 
-        @text_buffer = []
+        @text_buffer = ''
 
         @current_script = Scripts::Level1.create(self)
+
+        @new_text = true
       end
 
       def update
@@ -28,15 +30,22 @@ module Monad
           add_res_to_buffer(res)
           @current_input = nil
           @current_script.handle_command(res, cmd)
+          @new_text = true
         end
       end
 
       def draw
-        @text_buffer.reverse.each_with_index do |text, index|
-          x = PROMPT_PADDING
-          y = @window.height - (@command_line.height * (index + 2))
-          @font.draw(text, x, y, Monad::ZOrder::UI)
+        if @new_text
+          @text_image = Gosu::Image.from_text(@text_buffer.chomp,
+            @font.height,
+            font: @font.name,
+            width: cli_width
+          )
+
+          @new_text = false
         end
+
+        @text_image.draw(0, scrollback_y_pos(@text_image), Monad::ZOrder::UI)
 
         @command_line.draw(Monad::ZOrder::UI)
       end
@@ -49,7 +58,7 @@ module Monad
       end
 
       def add_to_buffer(text)
-        @text_buffer << text
+        @text_buffer += "#{text}\n"
       end
 
       private
@@ -62,6 +71,14 @@ module Monad
                 res[:stdout] || ''
               end
         res.split("\n").each { |partial| add_to_buffer(partial) }
+      end
+
+      def cli_width
+        @window.width # TODO: subtract the prompt width
+      end
+
+      def scrollback_y_pos(text)
+        @window.height - text.height - @command_line.height
       end
     end
   end
