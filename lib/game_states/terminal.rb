@@ -9,17 +9,15 @@ module Monad
         # The shell-sim colors the output. Turn that off so it can be handled here instead.
         String.disable_colorization = true
 
-        @shell = shell
-        @window.caption = 'Monad'
-
         @command_line = GosuStuff::TextField.new(@window, @font,
           PROMPT_PADDING, @window.height - (@font.height + PROMPT_PADDING))
         @window.text_input = @command_line
 
+        @shell = shell
+        @window.caption = 'Monad'
+
         @text_buffer = []
-
         @current_script = Scripts::Level1.create(self)
-
         @new_text = true
       end
 
