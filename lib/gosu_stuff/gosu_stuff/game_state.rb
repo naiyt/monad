@@ -4,9 +4,9 @@ module GosuStuff
       @config = GosuStuff.config
       @window = @config.window
       if @config.font
-        @font = Gosu::Font.new(@config.font_size)
-      else
         @font = Gosu::Font.new(@config.font_size, name: @config.font)
+      else
+        @font = Gosu::Font.new(@config.font_size)
       end
     end
 
