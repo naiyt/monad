@@ -42,19 +42,11 @@ module Monad
       end
 
       def draw
-        if @new_text
-          chomp_text_buffer!
-
-          @text_image = Gosu::Image.from_text(@text_buffer.join("\n"),
-            @font.height,
-            font: @font.name,
-            width: cli_width
-          )
-
-          @new_text = false
+        @text_buffer.reverse.each_with_index do |text, index|
+          x = PROMPT_PADDING
+          y = @window.height - (@command_line.height * (index + 2))
+          @font.draw(text, x, y, Monad::ZOrder::UI)
         end
-
-        @text_image.draw(0, scrollback_y_pos(@text_image), Monad::ZOrder::UI)
 
         @command_line.draw(Monad::ZOrder::UI)
 
@@ -87,21 +79,6 @@ module Monad
 
       def cli_width
         @window.width # TODO: subtract the prompt width
-      end
-
-      def scrollback_y_pos(text)
-        @window.height - text.height - @command_line.height
-      end
-
-      # Ensure that the text buffer is not larger than the screen
-      def chomp_text_buffer!
-        if @text_buffer.length > allowed_lines
-          @text_buffer = @text_buffer.drop(@text_buffer.length - allowed_lines)
-        end
-      end
-
-      def allowed_lines
-        @allowed_lines ||= (@window.height - @command_line.height) / @font.height
       end
 
       def cli_y_pos
