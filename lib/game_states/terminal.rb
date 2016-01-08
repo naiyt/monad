@@ -11,14 +11,9 @@ module Monad
 
         @prompt_text = "nate@monad: "
 
-        @prompt = Gosu::Image.from_text(@prompt_text,
-          @font.height,
-          font: @font.name
-        )
-
         @command_line = GosuStuff::TextField.new(@window,
           @font,
-          @prompt.width,
+          @font.text_width(@prompt_text),
           cli_y_pos,
           background_color = 0x00ffffff)
         @window.text_input = @command_line
@@ -50,7 +45,7 @@ module Monad
 
         @command_line.draw(Monad::ZOrder::UI)
 
-        @prompt.draw(0, cli_y_pos, Monad::ZOrder::UI)
+        @font.draw(@prompt_text, PROMPT_PADDING, cli_y_pos, Monad::ZOrder::UI)
       end
 
       def button_down(id)
