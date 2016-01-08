@@ -33,7 +33,7 @@ module Monad
 
       def update
         if @current_input
-          add_to_buffer(@current_input)
+          add_to_buffer("#{@prompt_text}#{@current_input}")
           res, cmd = @shell.handle_input(@current_input)
           add_res_to_buffer(res)
           @current_input = nil
@@ -62,7 +62,7 @@ module Monad
       end
 
       def add_to_buffer(text)
-        @text_buffer << "#{@prompt_text}#{text}"
+        @text_buffer << text
       end
 
       private
