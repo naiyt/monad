@@ -38,6 +38,3 @@ DEPENDENCIES
   pry
   pry-nav
   rspec
-
-BUNDLED WITH
-   1.11.2
