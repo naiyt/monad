@@ -16,8 +16,11 @@ module Monad
           font: @font.name
         )
 
-        @command_line = GosuStuff::TextField.new(@window, @font,
-          @prompt.width, cli_y_pos)
+        @command_line = GosuStuff::TextField.new(@window,
+          @font,
+          @prompt.width,
+          cli_y_pos,
+          background_color = 0x00ffffff)
         @window.text_input = @command_line
 
         @shell = shell
