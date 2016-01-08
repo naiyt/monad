@@ -23,6 +23,10 @@ module GosuStuff
       @font.text_width(self.text)
     end
 
+    def single_char_width
+      @font.text_width(" ")
+    end
+
     def height
       @font.height
     end
@@ -48,7 +52,12 @@ module GosuStuff
       pos_x = @x + @font.text_width(self.text[0...self.caret_pos])
       sel_x = @x + @font.text_width(self.text[0...self.selection_start])
 
-      @window.draw_line(pos_x, @y, @caret_color, pos_x, @y + height, @caret_color, 0)
+      @window.draw_quad(
+        pos_x,                     @y,          @caret_color,
+        pos_x + single_char_width, @y,          @caret_color,
+        pos_x,                     @y + height, @caret_color,
+        pos_x + single_char_width, @y + height, @caret_color
+      )
     end
   end
 end
