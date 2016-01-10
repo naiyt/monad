@@ -57,23 +57,24 @@ module Monad
       private
 
       def draw_text_buffer!
-        index_offset = 2 # 1 for command prompt, one for zero indexing
+        newlined_buffer = @text_buffer.map { |txt| add_newlines(txt) }.flatten
 
-        @text_buffer.reverse.each_with_index do |text, index|
-          if @font.text_width(text) > @window.width
-            first_half = text[0, allowed_chars]
-            second_half = text[allowed_chars..-1]
-            @font.draw(second_half, PROMPT_PADDING, y_text_pos(index + index_offset), Monad::ZOrder::UI)
-            index_offset += 1
-            @font.draw(first_half, PROMPT_PADDING, y_text_pos(index + index_offset), Monad::ZOrder::UI)
-          else
-            @font.draw(text, PROMPT_PADDING, y_text_pos(index + index_offset), Monad::ZOrder::UI)
-          end
+        newlined_buffer.reverse.each_with_index do |text, index|
+          x = PROMPT_PADDING
+          y = @window.height - (@command_line.height * (index + 2))
+          @font.draw(text, x, y, Monad::ZOrder::UI)
         end
       end
 
-      def y_text_pos(offset)
-        @window.height - (@command_line.height * (offset))
+      def add_newlines(text)
+        return text unless too_wide?(text)
+        first_half = text[0...allowed_chars]
+        second_half = text[allowed_chars..-1]
+        return [first_half, add_newlines(second_half)]
+      end
+
+      def too_wide?(text)
+        @font.text_width(text) > @window.width
       end
 
       def allowed_chars
