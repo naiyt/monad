@@ -90,10 +90,6 @@ module Monad
         res.split("\n").each { |partial| add_to_buffer(partial) }
       end
 
-      def cli_width
-        @window.width # TODO: subtract the prompt width
-      end
-
       def cli_y_pos
         @window.height - (@font.height + PROMPT_PADDING)
       end
