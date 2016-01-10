@@ -1,11 +1,11 @@
-require_relative 'shell_sim/output_helper'
-require_relative 'shell_sim/commands_helper'
-require_relative 'shell_sim/filesystem'
-require_relative 'shell_sim/shell'
-require_relative 'shell_sim/user'
-require_relative 'shell_sim/scripting'
+require_relative './output_helper'
+require_relative './commands_helper'
+require_relative './filesystem'
+require_relative './shell'
+require_relative './user'
+require_relative './scripting'
 
-Dir['./lib/shell_sim/shell_sim/commands/*.rb'].each { |f| require f }
+Dir['./lib/shell_sim/commands/*.rb'].each { |f| require f }
 
 #
 # Config
