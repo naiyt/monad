@@ -9,11 +9,6 @@ module GosuStuff
     end
 
     def draw(zorder)
-      @window.draw_quad(@x - @padding,         @y - @padding,          @background_color,
-                        @x + width + @padding, @y - @padding,          @background_color,
-                        @x - @padding,         @y + height + @padding, @background_color,
-                        @x + width + @padding, @y + height + @padding, @background_color, 0)
-
       draw_caret if @window.text_input == self
 
       @font.draw(self.text, @x, @y, zorder)
