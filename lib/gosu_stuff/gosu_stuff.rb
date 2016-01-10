@@ -1,9 +1,16 @@
 require 'gosu'
-require_relative 'gosu_stuff/config'
-require_relative 'gosu_stuff/exceptions'
-require_relative 'gosu_stuff/text_field'
-require_relative 'gosu_stuff/game_window'
-require_relative 'gosu_stuff/game_state'
+require_relative './text_field'
+require_relative './game_window'
+require_relative './game_state'
+
+#
+# Config
+
+module GosuStuff
+  class Config
+    attr_accessor :default_caption, :window, :font_size, :font
+  end
+end
 
 module GosuStuff
   def self.configure
@@ -21,5 +28,14 @@ module GosuStuff
   def self.play(initial_state)
     GameState.switch(initial_state)
     config.window.show
+  end
+end
+
+
+#
+# Custom exceptions
+
+module GosuStuff
+  class NotImplemented < StandardError
   end
 end
