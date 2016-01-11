@@ -21,7 +21,8 @@ ShellSim.configure do |config|
 end
 
 GosuStuff.configure do |config|
-  config.window    = GosuStuff::GameWindow.new(WINDOW_WIDTH, WINDOW_HEIGHT)
-  config.font      = font_path('consolas')
-  config.font_size = FONT_SIZE
+  config.window     = GosuStuff::GameWindow.new(WINDOW_WIDTH, WINDOW_HEIGHT)
+  config.font       = font_path('consolas')
+  config.font_size  = FONT_SIZE
+  config.font_color = 0xff00ff00
 end

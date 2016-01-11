@@ -11,7 +11,7 @@ module GosuStuff
     def draw(zorder)
       draw_caret if @window.text_input == self
 
-      @font.draw(self.text, @x, @y, zorder)
+      @font.draw(self.text, @x, @y, zorder, 1, 1, GosuStuff.config.font_color)
     end
 
     def width

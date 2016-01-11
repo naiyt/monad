@@ -39,7 +39,7 @@ module Monad
       def draw
         draw_text_buffer!
         @command_line.draw(Monad::ZOrder::UI)
-        @font.draw(@prompt_text, PROMPT_PADDING, cli_y_pos, Monad::ZOrder::UI)
+        @font.draw(@prompt_text, PROMPT_PADDING, cli_y_pos, Monad::ZOrder::UI, 1, 1, GosuStuff.config.font_color)
       end
 
       def button_down(id)
@@ -62,7 +62,7 @@ module Monad
         newlined_buffer.reverse.each_with_index do |text, index|
           x = PROMPT_PADDING
           y = @window.height - (@command_line.height * (index + 2))
-          @font.draw(text, x, y, Monad::ZOrder::UI)
+          @font.draw(text, x, y, Monad::ZOrder::UI, 1, 1, GosuStuff.config.font_color)
         end
       end
 

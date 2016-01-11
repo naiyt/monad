@@ -8,7 +8,7 @@ require_relative './game_state'
 
 module GosuStuff
   class Config
-    attr_accessor :default_caption, :window, :font_size, :font
+    attr_accessor :default_caption, :window, :font_size, :font, :font_color
   end
 end
 
