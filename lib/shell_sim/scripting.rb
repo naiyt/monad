@@ -11,7 +11,7 @@ module ShellSim
         @terminal = terminal
         @shell = Scripts.shell
         @fs = Filesystem::Filesystem.instance
-        @scripting_stack = []
+        @scripting_queue = []
         instance_eval(&block)
       end
 
@@ -34,10 +34,10 @@ module ShellSim
       end
 
       def output(txt)
-        if @scripting_stack.length == 0
+        if @scripting_queue.length == 0
           buffer_output(txt)
         else
-          @scripting_stack << { txt: txt, only_txt: true }
+          @scripting_queue << { txt: txt, only_txt: true }
         end
       end
 
@@ -45,29 +45,29 @@ module ShellSim
         @latest_cmds = cmds
         @latest_res = result
 
-        if current_task = @scripting_stack.first
+        if current_task = @scripting_queue.first
           buffer_output("Current task: #{current_task[:txt]}") if cmds && cmds.first[:cmd] == :task
 
           if current_task[:only_txt]
             buffer_txt_only_output
           elsif current_task[:cmd].call
-            @scripting_stack.shift
-            buffer_txt_only_output if @scripting_stack.first[:only_txt]
-            buffer_output @scripting_stack.first[:txt] if @scripting_stack.size > 0
+            @scripting_queue.shift
+            buffer_txt_only_output if @scripting_queue.first[:only_txt]
+            buffer_output @scripting_queue.first[:txt] if @scripting_queue.size > 0
           end
         end
       end
 
       def buffer_txt_only_output
-        while @scripting_stack.length > 0 && @scripting_stack.first[:only_txt]
-          buffer_output @scripting_stack.first[:txt]
-          @scripting_stack.shift
+        while @scripting_queue.length > 0 && @scripting_queue.first[:only_txt]
+          buffer_output @scripting_queue.first[:txt]
+          @scripting_queue.shift
         end
       end
 
       def add_expectation(expectation, txt)
-        buffer_output txt if @scripting_stack.length == 0
-        @scripting_stack << { cmd: expectation, txt: txt }
+        buffer_output txt if @scripting_queue.length == 0
+        @scripting_queue << { cmd: expectation, txt: txt }
       end
 
       def expect_cmd(cmd, txt=nil)
