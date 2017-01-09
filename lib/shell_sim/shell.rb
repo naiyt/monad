@@ -24,16 +24,14 @@ module ShellSim
 
     def run(forever=true)
       @runner.shell = self
-      begin
-        if forever
-          inner_run_loop while true
-        else
-          res, cmds = inner_run_loop
-          yield res, cmds if block_given?
-        end
-      rescue SystemExit, Interrupt
-        abort
+      if forever
+        inner_run_loop while true
+      else
+        res, cmds = inner_run_loop
+        yield res, cmds if block_given?
       end
+    rescue SystemExit, Interrupt
+      abort
     end
 
     def inner_run_loop
@@ -46,7 +44,7 @@ module ShellSim
         [{ stdout: '' }, nil]
       else
         @history << input
-        cmds = format_input(input)
+        cmds = parse_input(input)
         res = exec_cmds(cmds)
         output res unless (res == default_in || res.nil?)
         [res, cmds]
@@ -66,7 +64,7 @@ module ShellSim
       "[#{@user.name}@hacksh #{@fs.pwd.path_to}]: "
     end
 
-    def format_input(input)
+    def parse_input(input)
       # Split commands by pipes
       input = input.split("|")
 

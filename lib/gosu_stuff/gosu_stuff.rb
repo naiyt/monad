@@ -3,16 +3,12 @@ require_relative './text_field'
 require_relative './game_window'
 require_relative './game_state'
 
-#
-# Config
 
 module GosuStuff
   class Config
     attr_accessor :default_caption, :window, :font_size, :font, :font_color
   end
-end
 
-module GosuStuff
   def self.configure
     yield config
   end
@@ -29,13 +25,11 @@ module GosuStuff
     GameState.switch(initial_state)
     config.window.show
   end
-end
 
 
-#
-# Custom exceptions
+  #
+  # Custom Exceptions
 
-module GosuStuff
   class NotImplemented < StandardError
   end
 end
