@@ -35,7 +35,7 @@ Hacking for fun and profit!
 * You can make and delete files and directories
 * A command can have a `man` page by implementing the `manual` method
 
-** Things this can't do yet
+## Things this can't do yet
 
 * Filesystem changes aren't persisted between program runs
 * No concept of user permissions exists
