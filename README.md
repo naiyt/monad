@@ -2,6 +2,8 @@
 
 This is an under construction engine for creating "hacking" games, complete with a scripting engine, a shell simulator (including the concept of STDIN, STDOUT, piping, and output redirection), a bunch of Unix-y commands, a "filesystem", and a GUI built with [gosu](https://github.com/gosu/gosu). Think [Hacknet](http://store.steampowered.com/app/365450/), [hackmud](http://store.steampowered.com/app/469920/?snr=1_5_9__300), [Uplink](http://store.steampowered.com/app/1510/), etc.
 
+![Hacking demo](/images/hacking.gif)
+
 ## Running
 
 ```
