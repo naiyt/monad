@@ -49,6 +49,8 @@ Hacking for fun and profit!
 
 [Examples](https://github.com/naiyt/monad/tree/master/lib/scripts)
 
+![Scripting demo](/images/scripting.gif)
+
 Monad includes a scripting DLS that can be used to essentially create "levels". These can be used to teach the user various concepts as well as give them designated goals.
 
 Example
