@@ -8,7 +8,7 @@ This is an under construction engine for creating "hacking" games, complete with
 git clone git@github.com:naiyt/monad.git
 cd monad
 bundle install
-ruby main.rb # or ruby free-play.rb
+ruby main.rb freeplay
 ```
 
 ## Things this can do

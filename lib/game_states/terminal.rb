@@ -3,7 +3,7 @@ module Monad
     class Terminal < GosuStuff::GameState
       PROMPT_PADDING = 0
 
-      def initialize(shell)
+      def initialize(shell, script_klasses)
         super()
 
         # The shell-sim colors the output. Turn that off so it can be handled here instead.
@@ -22,7 +22,7 @@ module Monad
         @window.caption = 'Monad'
 
         @text_buffer = []
-        @current_script = Scripts::Level1.create(self)
+        @current_script = script_klasses.first.create(self)
         @new_text = true
       end
 
