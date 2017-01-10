@@ -1,4 +1,4 @@
-### Monad
+# Monad
 
 This is an under construction engine for creating "hacking" games, complete with a scripting engine, a shell simulator (including the concept of STDIN, STDOUT, piping, and output redirection), a bunch of Unix-y commands, a "filesystem", and a GUI built with [gosu](https://github.com/gosu/gosu). Think [Hacknet](http://store.steampowered.com/app/365450/), [hackmud](http://store.steampowered.com/app/469920/?snr=1_5_9__300), [Uplink](http://store.steampowered.com/app/1510/), etc.
 
@@ -75,7 +75,7 @@ ShellSim::Scripts::Script.new(terminal) do
 end
 ```
 
-# Currently available scripting methods
+### Currently available scripting methods
 
 NOTE: "Block" in this context means to not proceed to the next script expectation. The user's interaction with the shell will NOT be blocked.
 
